@@ -1,0 +1,9 @@
+{
+  "host": "localhost",
+  "port": 5600,
+  "public": "./public/",
+  "version": "1.0.0",
+  "origins": [
+    "http://localhost:5600"
+  ]
+}

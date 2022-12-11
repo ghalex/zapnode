@@ -1,0 +1,34 @@
+{
+  "name": "zapnode-plugins",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/zapnode-plugins.umd.js",
+  "module": "dist/zapnode-plugins.es.js",
+  "types": "dist/zapnode-plugins.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rm -rf dist && rollup -c",
+    "types": "tsc -P tsconfig.dts.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.3.8",
+    "express": "^4.18.2",
+    "zapnode": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.3",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "esbuild": "^0.16.4",
+    "rollup": "^3.7.2",
+    "rollup-plugin-dts": "^5.0.0",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "typescript": "^4.8.4"
+  }
+}
