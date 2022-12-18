@@ -9,6 +9,7 @@ class Hello {
   }
 
   async get (id: Id, params?: Params) {
+    console.log('id', id)
     return this.data.find(x => x.id.toString() === id)
   }
 }

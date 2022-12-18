@@ -1,6 +1,6 @@
 {
   "name": "zapnode-plugins",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/zapnode-plugins.umd.js",
   "module": "dist/zapnode-plugins.es.js",
@@ -20,6 +20,7 @@
   "dependencies": {
     "config": "^3.3.8",
     "express": "^4.18.2",
+    "ramda": "^0.28.0",
     "zapnode": "workspace:*"
   },
   "devDependencies": {

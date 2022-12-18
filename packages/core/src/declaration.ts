@@ -33,4 +33,3 @@ export interface ServiceMethods<T = any, D = Partial<T>, P = Params> {
 
 export type Service<T = any, D = Partial<T>, P = Params> = ServiceMethods<T, D, P>
 export { Application }
-

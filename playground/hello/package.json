@@ -19,7 +19,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "zapnode": "workspace:*",
-    "zapnode-plugins": "workspace:*"
+    "zapnode": "workspace:0.0.1",
+    "zapnode-plugins": "workspace:0.0.1"
   }
 }
