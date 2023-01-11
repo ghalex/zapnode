@@ -6,8 +6,16 @@ export interface ConfigData {
   host: string
   port: number
   version: string
+  mongodb: {
+    user: string
+    password: string
+    host: string
+    db: string
+    protocol: string
+  }
 }
 
 export type AppWithConfig = AppConfig<ConfigData>
 
-export type App = Application<MyServices> & AppExpress & AppWithConfig
+export type AppExtend = Application<MyServices> & AppExpress & AppWithConfig
+export interface App extends AppExtend {}

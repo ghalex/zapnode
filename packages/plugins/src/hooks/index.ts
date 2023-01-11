@@ -1,13 +1,13 @@
 import { Application, Id, NullableId, Params, Plugin, Service } from 'zapnode'
-import { tap, forEach, propOr } from 'ramda'
+import { tap, forEach, mergeDeepRight } from 'ramda'
 
 export default (): Plugin => {
   const addHooks = (app: Application, service: Service, hooks: any) => {
     const context: any = { app, service }
 
     const runWithHooks = async (methodName: string, method: any, ctx: any) => {
-      const hooksBefore = propOr<any, any, any>([], methodName, hooks.before)
-      const hooksAfter = propOr<any, any, any>([], methodName, hooks.after)
+      const hooksBefore = [].concat(hooks.before.all).concat(hooks.before[methodName])
+      const hooksAfter = [].concat(hooks.after.all).concat(hooks.after[methodName])
 
       forEach((fn: any) => tap(fn, ctx), hooksBefore)
       ctx.result = await method.call()
@@ -55,11 +55,28 @@ export default (): Plugin => {
         return await runWithHooks('update', method, ctx)
       }
     }
+
+    if (service.patch !== undefined) {
+      const _patch = service.patch.bind(service)
+
+      service.patch = async (id: NullableId, data: any, params?: Params) => {
+        const method = async () => await _patch(id, data, params)
+        const ctx = { ...context, params, data }
+        return await runWithHooks('patch', method, ctx)
+      }
+    }
   }
 
   function init (app: Application): void {
     app.events.newService.subscribe(({ key, service, options }) => {
-      addHooks(app, service, options.hooks)
+      const defaultHooks = {
+        before: { all: [], find: [], get: [], create: [], update: [], patch: [] },
+        after: { all: [], find: [], get: [], create: [], update: [], patch: [] }
+      }
+
+      const hooks = mergeDeepRight(defaultHooks, options.hooks)
+
+      addHooks(app, service, hooks)
     })
   }
 

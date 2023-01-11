@@ -13,7 +13,13 @@ const beforeFind = (ctx: any) => {
 }
 
 const addDate = (ctx: any) => {
-  ctx.result = ctx.result.map(item => ({ ...item, date: new Date() }))
+  const fn = item => ({ ...item, date: new Date() })
+
+  if (Array.isArray(ctx.result)) {
+    ctx.result = ctx.result.map(fn)
+  } else {
+    ctx.result = fn(ctx.result)
+  }
 }
 
 const addMsg = (ctx: any) => {
@@ -30,11 +36,10 @@ const registerServices = (app: App) => {
   app.addService('hello', new Hello(), {
     hooks: {
       before: {
-        find: [beforeFind]
+        find: []
       },
       after: {
-        find: [addDate, addMsg],
-        get: [addMsg]
+        all: [addMsg]
       }
     }
   })

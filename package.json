@@ -4,12 +4,14 @@
   "description": "",
   "scripts": {
     "build": "pnpm -r --filter='./packages/*' run build",
+    "publish": "pnpm -r --filter='./packages/*' publish --no-git-checks",
     "dev": "pnpm -r --parallel run dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "eslint": "^8.25.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",

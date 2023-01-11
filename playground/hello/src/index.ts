@@ -3,16 +3,20 @@ import { zapnode } from 'zapnode'
 import { config, express, hooks } from 'zapnode-plugins'
 
 import registerServices from './services'
-import registerDb from './mongodb'
+import mongodb from './plugins/mongodb'
 
 import type { App } from './declarations'
 
 const app: App = zapnode({
-  plugins: [config(), hooks(), express()]
+  plugins: [
+    config(),
+    hooks(),
+    express(),
+    mongodb()
+  ]
 })
 
 registerServices(app)
-registerDb(app)
 
 app
   .listen(app.config.port)

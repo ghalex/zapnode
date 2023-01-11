@@ -5,5 +5,10 @@
   "version": "1.0.0",
   "origins": [
     "http://localhost:5600"
-  ]
+  ],
+  "mongodb": {
+    "db": "zp-dev",
+    "protocol": "mongodb+srv",
+    "host": "zapcluster.66vib.mongodb.net"
+  }
 }

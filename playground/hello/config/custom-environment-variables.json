@@ -1,5 +1,9 @@
 {
   "authentication": {
     "secret": "SECRET"
+  },
+  "mongodb": {
+    "user": "MONGO_USER",
+    "password": "MONGO_PASSWORD"
   }
 }
