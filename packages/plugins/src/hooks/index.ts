@@ -2,7 +2,7 @@ import { Application, Id, NullableId, Params, Plugin, Service } from 'zapnode'
 import { tap, forEach, mergeDeepRight } from 'ramda'
 
 export default (): Plugin => {
-  const addHooks = (app: Application, service: Service, hooks: any) => {
+  const addHooks = (app: Application, service: Service, hooks: any, customMethods: any) => {
     const context: any = { app, service }
 
     const runWithHooks = async (methodName: string, method: any, ctx: any) => {
@@ -65,20 +65,37 @@ export default (): Plugin => {
         return await runWithHooks('patch', method, ctx)
       }
     }
+
+    if (customMethods !== undefined) {
+      const methods = Object.keys(customMethods)
+
+      for (const methodName of methods) {
+        if (service[methodName] !== undefined) {
+          const _methodCustom = service[methodName].bind(service)
+
+          service[methodName] = async (data: any, params?: Params) => {
+            const method = async () => await _methodCustom(data, params)
+            const ctx = { ...context, params, data }
+            return await runWithHooks(methodName, method, ctx)
+          }
+        }
+      }
+    }
   }
 
   function init (app: Application): void {
     app.events.newService.subscribe(({ key, service, options }) => {
-      const methods = ['all', 'find', 'get', 'create', 'update', 'patch']
+      const methods = ['all', 'find', 'get', 'create', 'update', 'patch'].concat(options.customMethods !== undefined ? Object.keys(options.customMethods) : [])
+      const defaultHooks = { before: {}, after: {} }
 
-      const defaultHooks = {
-        before: { all: [], find: [], get: [], create: [], update: [], patch: [] },
-        after: { all: [], find: [], get: [], create: [], update: [], patch: [] }
+      for (const method of methods) {
+        defaultHooks.before[method] = []
+        defaultHooks.after[method] = []
       }
 
       const hooks = mergeDeepRight(defaultHooks, options.hooks)
 
-      addHooks(app, service, hooks)
+      addHooks(app, service, hooks, options.customMethods)
     })
   }
 

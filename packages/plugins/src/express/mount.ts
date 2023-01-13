@@ -82,7 +82,32 @@ const patchHandler = (service: Service) => (req: Request, res: Response, next): 
   }
 }
 
-const mount = (app: Express, path: string, service: Service): void => {
+const customHandler = (method: string, service: Service) => (req: Request, res: Response, next): void => {
+  const params: Params = getParams(req)
+  const body = req.body
+
+  console.log(method, service, service[method])
+
+  if (service[method] !== undefined) {
+    service[method](body, params)
+      .then(data => res.status(200).json(data))
+      .catch(err => errorHandler(err, req, res))
+  } else {
+    return errorHandler(new NotImplemented(), req, res)
+  }
+}
+
+const mount = (app: Express, path: string, service: Service, options: any): void => {
+  const { customMethods } = options
+
+  if (customMethods !== undefined) {
+    const methods = Object.keys(customMethods)
+
+    for (const method of methods) {
+      app.post(`${path}/${customMethods[method].path as string ?? method}`, customHandler(method, service))
+    }
+  }
+
   app.get(path, findHandler(service))
   app.get(path + '/:id', getHandler(service))
   app.post(path, createHandler(service))

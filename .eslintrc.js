@@ -19,6 +19,7 @@ module.exports = {
     // tsconfigRootDir: __dirname
   },
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/return-await': 'off'
   }
 }

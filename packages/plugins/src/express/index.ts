@@ -30,8 +30,8 @@ export default (app?: Express): Plugin => {
     app.listen = listen
     app.express = expressApp
 
-    app.events.newService.subscribe(({ key, service }) => {
-      mount(expressApp, '/' + key, service)
+    app.events.newService.subscribe(({ key, service, options }) => {
+      mount(expressApp, `/${key as string}`, service, options)
     })
   }
 

@@ -4,23 +4,23 @@ import { App } from '../declarations'
 import Hello from './hello'
 import Status from './status'
 
-const beforeFind = (ctx: any) => {
-  const page = parseInt(ctx.params.query.page)
+// const beforeFind = (ctx: any) => {
+//   const page = parseInt(ctx.params.query.page)
 
-  if (page > 1) {
-    throw new GeneralError('Max page is 1')
-  }
-}
+//   if (page > 1) {
+//     throw new GeneralError('Max page is 1')
+//   }
+// }
 
-const addDate = (ctx: any) => {
-  const fn = item => ({ ...item, date: new Date() })
+// const addDate = (ctx: any) => {
+//   const fn = item => ({ ...item, date: new Date() })
 
-  if (Array.isArray(ctx.result)) {
-    ctx.result = ctx.result.map(fn)
-  } else {
-    ctx.result = fn(ctx.result)
-  }
-}
+//   if (Array.isArray(ctx.result)) {
+//     ctx.result = ctx.result.map(fn)
+//   } else {
+//     ctx.result = fn(ctx.result)
+//   }
+// }
 
 const addMsg = (ctx: any) => {
   const fn = (item: any) => ({ ...item, msg: `Welcome ${item.name as string}` })

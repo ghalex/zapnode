@@ -11,8 +11,8 @@ const app: App = zapnode({
   plugins: [
     config(),
     hooks(),
-    express(),
-    mongodb()
+    express()
+    // mongodb()
   ]
 })
 

@@ -11,6 +11,10 @@ class Hello {
   async get (id: Id, params?: Params) {
     return this.data.find(x => x.id.toString() === id)
   }
+
+  async say (data: any, params?: Params) {
+    return { hi: 'Welcome' }
+  }
 }
 
 export default Hello
