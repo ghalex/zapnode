@@ -69,6 +69,8 @@ export default (): Plugin => {
 
   function init (app: Application): void {
     app.events.newService.subscribe(({ key, service, options }) => {
+      const methods = ['all', 'find', 'get', 'create', 'update', 'patch']
+
       const defaultHooks = {
         before: { all: [], find: [], get: [], create: [], update: [], patch: [] },
         after: { all: [], find: [], get: [], create: [], update: [], patch: [] }

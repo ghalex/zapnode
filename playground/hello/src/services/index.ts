@@ -41,6 +41,9 @@ const registerServices = (app: App) => {
       after: {
         all: [addMsg]
       }
+    },
+    customMethods: {
+      say: { path: 'say' }
     }
   })
 
