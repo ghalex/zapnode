@@ -48,7 +48,8 @@ const registerServices = (app: App) => {
   })
 
   app.addService('status', new Status(app.config), {
-    hooks: {}
+    hooks: {},
+    customPath: '/'
   })
 }
 

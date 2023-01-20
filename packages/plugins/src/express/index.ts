@@ -39,7 +39,9 @@ export default (app?: Express): Plugin => {
     app.express = expressApp
 
     app.events.newService.subscribe(({ key, service, options }) => {
-      mount(expressApp, `/${key}`, service, options)
+      const path = `/${key}`
+      const { customPath } = options
+      mount(expressApp, customPath ?? path, service, options)
     })
   }
 
