@@ -1,6 +1,12 @@
 import { Id, Params } from 'zapnode'
 import { people } from '../mock'
 
+interface Query {
+  name: string
+}
+
+interface MyParams extends Params<Query> {}
+
 class Hello {
   private readonly data = people
 
@@ -8,7 +14,7 @@ class Hello {
     return this.data
   }
 
-  async get (id: Id, params?: Params) {
+  async get (id: Id, params?: MyParams) {
     return this.data.find(x => x.id.toString() === id)
   }
 

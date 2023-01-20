@@ -38,7 +38,7 @@ export class Application<S extends { [key: string]: Service } = any> {
     }
   }
 
-  public addService (key: string, service: Service, options: any): void {
+  public addService <L extends keyof S & string>(key: L, service: S[L], options: any): void {
     if (this.#services.has(key)) {
       throw new Error(`Service ${key} allready registered.`)
     }
