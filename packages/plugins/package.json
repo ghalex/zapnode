@@ -1,6 +1,6 @@
 {
   "name": "zapnode-plugins",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "dist/zapnode-plugins.umd.js",
   "module": "dist/zapnode-plugins.es.js",
