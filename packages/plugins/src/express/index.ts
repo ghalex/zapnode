@@ -1,5 +1,6 @@
 import express, { Express } from 'express'
 import { Application, Plugin } from 'zapnode'
+import { queryParser } from 'express-query-parser'
 
 import cors from './cors'
 import mount from './mount'
@@ -15,6 +16,13 @@ export default (app?: Express): Plugin => {
 
   expressApp.use(express.urlencoded({ extended: true }))
   expressApp.use(express.json())
+  expressApp.use(queryParser({
+    parseNull: true,
+    parseUndefined: true,
+    parseBoolean: true,
+    parseNumber: true
+  }))
+
   expressApp.use('/', cors('*'))
 
   const listen = async (port: number): Promise<void> => {
@@ -31,7 +39,7 @@ export default (app?: Express): Plugin => {
     app.express = expressApp
 
     app.events.newService.subscribe(({ key, service, options }) => {
-      mount(expressApp, `/${key as string}`, service, options)
+      mount(expressApp, `/${key}`, service, options)
     })
   }
 
