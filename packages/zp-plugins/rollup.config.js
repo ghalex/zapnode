@@ -1,5 +1,5 @@
 const path = require('path')
-const { config } = require('process')
+// const { config } = require('process')
 const dts = require('rollup-plugin-dts').default
 const esbuild = require('rollup-plugin-esbuild').default
 const pkg = require('./package.json')
@@ -16,12 +16,13 @@ module.exports = [
     ],
     output: [
       {
-        name: 'zapnode',
+        name: 'zapnode-plugins',
         file: path.resolve(__dirname, `dist/${name}.umd.js`),
         format: 'umd',
         globals: {
           config: 'config',
-          express: 'express'
+          express: 'express',
+          zapnode: 'zapnode'
         }
       },
       {

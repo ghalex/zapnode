@@ -1,10 +1,10 @@
 {
-  "name": "zapnode-plugins",
-  "version": "0.0.7",
-  "description": "",
-  "main": "dist/zapnode-plugins.umd.js",
-  "module": "dist/zapnode-plugins.es.js",
-  "types": "dist/zapnode-plugins.d.ts",
+  "name": "zapnode-data",
+  "version": "0.0.8",
+  "description": "zapnode data adapters",
+  "main": "dist/zapnode-data.umd.js",
+  "module": "dist/zapnode-data.es.js",
+  "types": "dist/zapnode-data.d.ts",
   "files": [
     "dist",
     "src"
@@ -15,8 +15,7 @@
     "types": "tsc -P tsconfig.dts.json"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ghiura Alexandru",
   "dependencies": {
     "config": "^3.3.8",
     "express": "^4.18.2",

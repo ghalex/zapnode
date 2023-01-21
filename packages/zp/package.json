@@ -1,6 +1,7 @@
 {
   "name": "zapnode",
-  "version": "0.0.7",
+  "version": "0.0.8",
+  "description": "zapnode core library",
   "main": "dist/zapnode.umd.js",
   "module": "dist/zapnode.es.js",
   "types": "dist/zapnode.d.ts",
@@ -11,19 +12,18 @@
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rm -rf dist && rollup -c",
-    "types": "tsc -P tsconfig.dts.json",
-    "prebuild": "rm -rf dist",
-    "changeset": "changeset"
+    "types": "tsc -P tsconfig.dts.json"
+  },
+  "keywords": [],
+  "author": "Ghiura Alexandru",
+  "dependencies": {
+    "rxjs": "^7.6.0"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.26.0",
     "esbuild": "^0.16.4",
     "rollup": "^3.7.2",
     "rollup-plugin-dts": "^5.0.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "typescript": "^4.8.4"
-  },
-  "dependencies": {
-    "rxjs": "^7.6.0"
   }
 }
