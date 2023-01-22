@@ -1,12 +1,12 @@
 import { Application, Plugin } from 'zapnode'
 import config from 'config'
 
-export interface AppConfig<D> {
+export interface AppConfig<D = any> {
   config: D
 }
 
 export default (): Plugin => {
-  function init (app: Application & { config: any }): void {
+  function init (app: Application & AppConfig): void {
     app.config = config
   }
 
