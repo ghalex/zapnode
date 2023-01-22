@@ -1,5 +1,5 @@
 import { Id, Params } from 'zapnode'
-import { people } from '../mock'
+import { people } from '@/mock'
 
 interface Query {
   name: string
@@ -7,7 +7,7 @@ interface Query {
 
 interface MyParams extends Params<Query> {}
 
-class Hello {
+class HelloClass {
   private readonly data = people
 
   async find (params?: Params) {
@@ -23,4 +23,4 @@ class Hello {
   }
 }
 
-export default Hello
+export default HelloClass

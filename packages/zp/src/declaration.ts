@@ -23,9 +23,9 @@ export interface Params<Q = Query> {
 }
 
 export interface ServiceMethods<T = any, D = Partial<T>, P = Params> {
-  find?: (params?: P) => Promise<T | T[]>
+  find?: (params?: P) => Promise<{ total: number, limit?: number, skip: number, data: T[] }>
   get?: (id: Id, params?: P) => Promise<T>
-  create?: (data: D, params?: P) => Promise<T>
+  create?: (data: D, params?: P) => Promise<T | T[]>
   update?: (id: NullableId, data: D, params?: P) => Promise<T | T[]>
   patch?: (id: NullableId, data: D, params?: P) => Promise<T | T[]>
   remove?: (id: NullableId, params?: P) => Promise<T | T[]>

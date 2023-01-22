@@ -1,5 +1,5 @@
 import { Express, Request, Response } from 'express'
-import { Id, Params, Service, NotImplemented } from 'zapnode'
+import { Id, Params, Service, NotImplemented, NullableId } from 'zapnode'
 import errorHandler from './errorHandler'
 
 const getParams = (req: Request): Params => {
@@ -67,8 +67,22 @@ const updateHandler = (service: Service) => (req: Request, res: Response, next):
   }
 }
 
+const removeHandler = (service: Service) => (req: Request, res: Response, next): void => {
+  const id: NullableId = req.params.id ?? null
+  const params: Params = getParams(req)
+
+  if (service.remove !== undefined) {
+    service
+      .remove(id, params)
+      .then(data => res.status(200).json(data))
+      .catch(err => errorHandler(err, req, res))
+  } else {
+    return errorHandler(new NotImplemented(), req, res)
+  }
+}
+
 const patchHandler = (service: Service) => (req: Request, res: Response, next): void => {
-  const id: Id = req.params.id
+  const id: NullableId = req.params.id ?? null
   const params: Params = getParams(req)
   const body = req.body
 
@@ -85,8 +99,6 @@ const patchHandler = (service: Service) => (req: Request, res: Response, next): 
 const customHandler = (method: string, service: Service) => (req: Request, res: Response, next): void => {
   const params: Params = getParams(req)
   const body = req.body
-
-  console.log(method, service, service[method])
 
   if (service[method] !== undefined) {
     service[method](body, params)
@@ -111,8 +123,11 @@ const mount = (app: Express, path: string, service: Service, options: any): void
   app.get(path, findHandler(service))
   app.get(path + '/:id', getHandler(service))
   app.post(path, createHandler(service))
-  app.post(path + '/:id', updateHandler(service))
+  app.put(path + '/:id', updateHandler(service))
   app.patch(path + '/:id', patchHandler(service))
+  app.patch(path, patchHandler(service))
+  app.delete(path + '/:id', removeHandler(service))
+  app.delete(path, removeHandler(service))
 }
 
 export default mount

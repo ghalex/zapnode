@@ -1,6 +1,5 @@
-import { Application } from 'zapnode'
+import { Application, Service } from 'zapnode'
 import { AppExpress, AppConfig } from 'zapnode-plugins'
-import type { MyServices } from './services'
 
 export interface ConfigData {
   host: string
@@ -15,7 +14,13 @@ export interface ConfigData {
   }
 }
 
-export type AppWithConfig = AppConfig<ConfigData>
+interface Services {
+  [key: string]: Service
+}
+export interface MyServices extends Services {}
 
+export type AppWithConfig = AppConfig<ConfigData>
 export type AppExtend = Application<MyServices> & AppExpress & AppWithConfig
-export interface App extends AppExtend {}
+export interface App extends AppExtend {
+
+}

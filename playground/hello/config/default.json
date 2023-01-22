@@ -7,8 +7,8 @@
     "http://localhost:5600"
   ],
   "mongodb": {
-    "db": "zp-dev",
-    "protocol": "mongodb+srv",
-    "host": "zapcluster.66vib.mongodb.net"
+    "db": "hello",
+    "protocol": "mongodb",
+    "host": "localhost"
   }
 }

@@ -11,15 +11,17 @@ const app: App = zapnode({
   plugins: [
     config(),
     hooks(),
-    express()
-    // mongodb()
+    express(),
+    mongodb()
   ]
 })
 
-registerServices(app)
+const start = async () => {
+  await registerServices(app)
+  await app.listen(app.config.port)
+}
 
-app
-  .listen(app.config.port)
+start()
   .then(() => {
     console.log('API ready at http://localhost:%s', app.config.port)
     console.log('API version: %s', app.config.version)

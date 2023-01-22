@@ -1,8 +1,8 @@
 
-import { ConfigData } from '../declarations'
 import { Params } from 'zapnode'
+import { ConfigData } from '@/declarations'
 
-class Status {
+class StatusClass {
   constructor (protected config: ConfigData) {}
 
   async find (params?: Params) {
@@ -14,4 +14,4 @@ class Status {
   }
 }
 
-export default Status
+export default StatusClass
