@@ -1,6 +1,7 @@
 export * from './config'
 export * from './express'
 export * from './mongodb'
+export * from './hooks'
 
 export { default as hooks } from './hooks'
 export { default as config } from './config'

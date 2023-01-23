@@ -1,17 +1,28 @@
 import { Application, Id, NullableId, Params, Plugin, Service } from 'zapnode'
-import { tap, forEach, mergeDeepRight } from 'ramda'
+import { mergeDeepRight } from 'ramda'
+
+export interface HookContext<A = Application> {
+  readonly app: A
+  readonly service: Service
+  readonly method: string
+  readonly type: 'before' | 'after'
+  params: Params
+  id?: Id
+  data?: any
+  result?: any
+}
 
 export default (): Plugin => {
   const addHooks = (app: Application, service: Service, hooks: any, customMethods: any) => {
     const context: any = { app, service }
 
-    const runWithHooks = async (methodName: string, method: any, ctx: any) => {
-      const hooksBefore = [].concat(hooks.before.all).concat(hooks.before[methodName])
-      const hooksAfter = [].concat(hooks.after.all).concat(hooks.after[methodName])
+    const runWithHooks = async (methodName: string, method: any, ctx: HookContext) => {
+      const hooksBefore: any[] = [].concat(hooks.before.all).concat(hooks.before[methodName])
+      const hooksAfter: any[] = [].concat(hooks.after.all).concat(hooks.after[methodName])
 
-      forEach((fn: any) => tap(fn, ctx), hooksBefore)
+      await Promise.all(hooksBefore.map(fn => fn({ ...ctx, type: 'before' })))
       ctx.result = await method.call()
-      forEach((fn: any) => tap(fn, ctx), hooksAfter)
+      await Promise.all(hooksAfter.map(fn => fn({ ...ctx, type: 'after' })))
 
       return ctx.result
     }
@@ -114,3 +125,6 @@ export default (): Plugin => {
     init
   }
 }
+
+export { default as resultHook } from './all/resultHook'
+export { default as dataHook } from './all/dataHook'

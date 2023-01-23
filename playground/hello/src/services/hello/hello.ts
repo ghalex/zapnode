@@ -1,16 +1,12 @@
+import { resultHook } from 'zapnode-plugins'
 import { App } from '@/declarations'
 
 import HelloClass from './hello.class'
+import { helloResolver } from './hello.schema'
 
-const addMsg = (ctx: any) => {
-  const fn = (item: any) => ({ ...item, msg: `Welcome ${item.name as string}` })
-
-  if (Array.isArray(ctx.result)) {
-    ctx.result = ctx.result.map(fn)
-  } else {
-    ctx.result = fn(ctx.result)
-  }
-}
+// const myHook = async (ctx: HookContext) => {
+//   ctx.result = await Promise.all(ctx.result.map(async (item) => await yearResolver.resolve(item, ctx)))
+// }
 
 export const registerHello = async (app: App) => {
   app.addService('hello', new HelloClass(), {
@@ -19,7 +15,8 @@ export const registerHello = async (app: App) => {
         find: []
       },
       after: {
-        all: [addMsg]
+        find: [resultHook(helloResolver)],
+        get: [resultHook(helloResolver)]
       }
     },
     customMethods: {

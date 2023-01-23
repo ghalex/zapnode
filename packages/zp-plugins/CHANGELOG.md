@@ -1,5 +1,13 @@
 # zapnode-plugins
 
+## 0.0.11
+
+### Patch Changes
+
+- add resolve, resultHook, dataHook
+- Updated dependencies
+  - zapnode@0.0.10
+
 ## 0.0.10
 
 ### Patch Changes

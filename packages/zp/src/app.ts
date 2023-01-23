@@ -60,12 +60,5 @@ export const zapnode = <A extends Application>(options: Options): A => {
     app.addPlugin(plugin)
   }
 
-  // const services = (app as any)
-
-  // for (const key in options.services) {
-  //   const [service, options] = services[key]
-  //   app.addService(key, service, options)
-  // }
-
   return app as A
 }

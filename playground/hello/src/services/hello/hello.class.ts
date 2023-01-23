@@ -1,24 +1,19 @@
-import { Id, Params } from 'zapnode'
+import { Id } from 'zapnode'
 import { people } from '@/mock'
-
-interface Query {
-  name: string
-}
-
-interface MyParams extends Params<Query> {}
+import { Hello, HelloParams } from './hello.schema'
 
 class HelloClass {
   private readonly data = people
 
-  async find (params?: Params) {
-    return this.data
+  async find (params?: HelloParams): Promise<Hello[]> {
+    return this.data as Hello[]
   }
 
-  async get (id: Id, params?: MyParams) {
+  async get (id: Id, params?: HelloParams) {
     return this.data.find(x => x.id.toString() === id)
   }
 
-  async say (data: any, params?: Params) {
+  async say (data: any, params?: HelloParams) {
     return { hi: 'Welcome' }
   }
 }
