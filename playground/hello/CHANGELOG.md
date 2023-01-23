@@ -1,5 +1,12 @@
 # hello
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies
+  - zapnode-plugins@0.0.14
+
 ## 1.0.5
 
 ### Patch Changes
