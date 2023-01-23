@@ -16,13 +16,20 @@ export default (): Plugin => {
   const addHooks = (app: Application, service: Service, hooks: any, customMethods: any) => {
     const context: any = { app, service }
 
-    const runWithHooks = async (methodName: string, method: any, ctx: HookContext) => {
+    const runWithHooks = async (methodName: string, method: any, ctx: any) => {
       const hooksBefore: any[] = [].concat(hooks.before.all).concat(hooks.before[methodName])
       const hooksAfter: any[] = [].concat(hooks.after.all).concat(hooks.after[methodName])
 
-      await Promise.all(hooksBefore.map(fn => fn({ ...ctx, type: 'before' })))
+      // before hook
+      ctx.type = 'before'
+      await Promise.all(hooksBefore.map(fn => fn(ctx)))
+
+      // execute
       ctx.result = await method.call()
-      await Promise.all(hooksAfter.map(fn => fn({ ...ctx, type: 'after' })))
+
+      // after hook
+      ctx.type = 'after'
+      await Promise.all(hooksAfter.map(fn => fn(ctx)))
 
       return ctx.result
     }

@@ -1,12 +1,16 @@
 import { Id } from 'zapnode'
 import { people } from '@/mock'
-import { Hello, HelloParams } from './hello.schema'
+import { HelloParams } from './hello.schema'
 
 class HelloClass {
   private readonly data = people
 
-  async find (params?: HelloParams): Promise<Hello[]> {
-    return this.data as Hello[]
+  async find (params?: HelloParams): Promise<any> {
+    return {
+      total: 3,
+      skip: 0,
+      data: people
+    }
   }
 
   async get (id: Id, params?: HelloParams) {

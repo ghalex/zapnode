@@ -1,5 +1,11 @@
 # zapnode
 
+## 0.0.12
+
+### Patch Changes
+
+- fix hook after bug
+
 ## 0.0.11
 
 ### Patch Changes

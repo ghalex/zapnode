@@ -12,6 +12,8 @@ const resultHook = <T, C extends HookContext>(resolver: Resolver<T, C>) => {
   return async (ctx: C) => {
     const { data, isPaginated } = getData(ctx)
 
+    console.log('ispaginated', isPaginated, data)
+
     const result = Array.isArray(data)
       ? await Promise.all(data.map(async (item) => await resolver.resolve(item, ctx)))
       : await resolver.resolve(data, ctx)
@@ -19,6 +21,8 @@ const resultHook = <T, C extends HookContext>(resolver: Resolver<T, C>) => {
     ctx.result = isPaginated
       ? { ...ctx.result, data: result }
       : result
+
+    console.log(result, ctx.result)
   }
 }
 
