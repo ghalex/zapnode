@@ -1,5 +1,11 @@
 # zapnode
 
+## 0.0.11
+
+### Patch Changes
+
+- fix resultHook bug
+
 ## 0.0.10
 
 ### Patch Changes

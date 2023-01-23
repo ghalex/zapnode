@@ -13,7 +13,7 @@ const resultHook = <T, C extends HookContext>(resolver: Resolver<T, C>) => {
     const { data, isPaginated } = getData(ctx)
 
     const result = Array.isArray(data)
-      ? await Promise.all(ctx.result.map(async (item) => await resolver.resolve(item, ctx)))
+      ? await Promise.all(data.map(async (item) => await resolver.resolve(item, ctx)))
       : await resolver.resolve(data, ctx)
 
     ctx.result = isPaginated

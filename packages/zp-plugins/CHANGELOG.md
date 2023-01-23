@@ -1,5 +1,13 @@
 # zapnode-plugins
 
+## 0.0.12
+
+### Patch Changes
+
+- fix resultHook bug
+- Updated dependencies
+  - zapnode@0.0.11
+
 ## 0.0.11
 
 ### Patch Changes
