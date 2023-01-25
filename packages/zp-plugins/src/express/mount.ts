@@ -5,7 +5,8 @@ import errorHandler from './errorHandler'
 const getParams = (req: Request): Params => {
   return {
     headers: req.headers,
-    query: req.query
+    query: req.query,
+    authenticated: false
   }
 }
 
@@ -116,9 +117,12 @@ const mount = (app: Express, path: string, service: Service, options: any): void
     const methods = Object.keys(customMethods)
 
     for (const method of methods) {
+      // console.log('registering custom method', `${path}/${customMethods[method].path as string ?? method}`)
       app.post(`${path}/${customMethods[method].path as string ?? method}`, customHandler(method, service))
     }
   }
+
+  // console.log('registering:', path)
 
   app.get(path, findHandler(service))
   app.get(path + '/:id', getHandler(service))

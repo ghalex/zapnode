@@ -14,6 +14,7 @@ module.exports = {
       'packages/zp/tsconfig.json',
       'packages/zp-plugins/tsconfig.json',
       'packages/zp-data/tsconfig.json',
+      'packages/zp-auth/tsconfig.json',
       'playground/hello/tsconfig.json'
     ]
     // tsconfigRootDir: __dirname

@@ -2,11 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NullableId, Params } from 'zapnode'
 import { MongoDBService } from 'zapnode-data'
-
-interface User {
-  email: string
-  name: string
-}
+import { User, UserData } from './users.schema'
 
 interface Query {
 }
@@ -14,6 +10,13 @@ interface Query {
 interface UsersParams extends Params<Query> {}
 
 class UsersClass extends MongoDBService<User> {
+  async find (params?: UsersParams) {
+    return this.$find(params)
+  }
+
+  async create (data: UserData, params?: UsersParams) {
+    return this.$create(data, params)
+  }
 }
 
 export default UsersClass

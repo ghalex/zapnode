@@ -1,23 +1,8 @@
 import { App } from '@/declarations'
-
 import UsersClass from './users.class'
-
-const addMsg = (ctx: any) => {
-  const fn = (item: any) => ({ ...item, msg: `Welcome ${item.name as string}` })
-  const { method, result } = ctx
-
-  if (method === 'find') {
-    ctx.result = { ...result, data: result.data.map(fn) }
-    return
-  }
-
-  if (Array.isArray(result)) {
-    ctx.result = result.map(fn)
-    return
-  }
-
-  ctx.result = fn(result)
-}
+import { userDataResolver, userResultResolver } from './users.schema'
+import { dataHook, resultHook } from 'zapnode-plugins'
+import { authenticate } from 'zapnode-auth'
 
 export const registerUsers = async (app: App) => {
   const db = await app.db
@@ -28,14 +13,16 @@ export const registerUsers = async (app: App) => {
   app.addService('users', new UsersClass(collection), {
     hooks: {
       before: {
-        find: []
+        find: [authenticate()],
+        get: [authenticate()],
+        update: [authenticate()],
+        patch: [authenticate()],
+        remove: [authenticate()],
+        create: [dataHook(userDataResolver)]
       },
       after: {
-        all: [addMsg]
+        all: [resultHook(userResultResolver)]
       }
-    },
-    customMethods: {
-      say: { path: 'say' }
     }
   })
 }

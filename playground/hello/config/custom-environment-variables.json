@@ -1,6 +1,8 @@
 {
-  "authentication": {
-    "secret": "SECRET"
+  "auth": {
+    "jwt": {
+      "secret": "SECRET"
+    }
   },
   "mongodb": {
     "user": "MONGO_USER",

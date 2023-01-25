@@ -10,5 +10,19 @@
     "db": "hello",
     "protocol": "mongodb",
     "host": "localhost"
+  },
+  "auth": {
+    "entity": "user",
+    "entityFields": [
+      "_id",
+      "name",
+      "email"
+    ],
+    "jwt": {
+      "options": {
+        "issuer": "zapnode",
+        "expiresIn": "10d"
+      }
+    }
   }
 }

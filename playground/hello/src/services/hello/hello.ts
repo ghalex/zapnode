@@ -3,6 +3,7 @@ import { App } from '@/declarations'
 
 import HelloClass from './hello.class'
 import { helloResolver } from './hello.schema'
+import { authenticate } from 'zapnode-auth'
 
 // const myHook = async (ctx: HookContext) => {
 //   ctx.result = await Promise.all(ctx.result.map(async (item) => await yearResolver.resolve(item, ctx)))
@@ -12,7 +13,7 @@ export const registerHello = async (app: App) => {
   app.addService('hello', new HelloClass(), {
     hooks: {
       before: {
-        find: []
+        all: [authenticate()]
       },
       after: {
         find: [resultHook(helloResolver)],

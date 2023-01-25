@@ -22,6 +22,7 @@
   "dependencies": {
     "mongodb": "^4.13.0",
     "zapnode": "workspace:*",
+    "zapnode-auth": "workspace:*",
     "zapnode-data": "workspace:*",
     "zapnode-plugins": "workspace:*"
   }

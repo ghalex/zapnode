@@ -38,8 +38,8 @@ export default (): Plugin => {
       const _find = service.find.bind(service)
 
       service.find = async (params?: Params) => {
-        const method = async () => await _find(params)
         const ctx = { ...context, params, method: 'find' }
+        const method = async () => await _find(ctx.params)
         return await runWithHooks('find', method, ctx)
       }
     }
@@ -48,8 +48,8 @@ export default (): Plugin => {
       const _get = service.get.bind(service)
 
       service.get = async (id: Id, params?: Params) => {
-        const method = async () => await _get(id, params)
         const ctx = { ...context, params, id, method: 'get' }
+        const method = async () => await _get(ctx.id, ctx.params)
         return await runWithHooks('get', method, ctx)
       }
     }
@@ -58,8 +58,8 @@ export default (): Plugin => {
       const _create = service.create.bind(service)
 
       service.create = async (data: any, params?: Params) => {
-        const method = async () => await _create(data, params)
-        const ctx = { ...context, params, data, method: 'create' }
+        const ctx = { ...context, data, params, method: 'create' }
+        const method = async () => await _create(ctx.data, ctx.params)
         return await runWithHooks('create', method, ctx)
       }
     }
@@ -68,8 +68,8 @@ export default (): Plugin => {
       const _update = service.update.bind(service)
 
       service.update = async (id: NullableId, data: any, params?: Params) => {
-        const method = async () => await _update(id, data, params)
-        const ctx = { ...context, params, data, method: 'update' }
+        const ctx = { ...context, id, params, data, method: 'update' }
+        const method = async () => await _update(ctx.id, ctx.data, ctx.params)
         return await runWithHooks('update', method, ctx)
       }
     }
@@ -78,8 +78,8 @@ export default (): Plugin => {
       const _patch = service.patch.bind(service)
 
       service.patch = async (id: NullableId, data: any, params?: Params) => {
-        const method = async () => await _patch(id, data, params)
         const ctx = { ...context, params, data, method: 'patch' }
+        const method = async () => await _patch(ctx.id, ctx.data, ctx.params)
         return await runWithHooks('patch', method, ctx)
       }
     }
@@ -88,8 +88,8 @@ export default (): Plugin => {
       const _remove = service.remove.bind(service)
 
       service.remove = async (id: NullableId, params?: Params) => {
-        const method = async () => await _remove(id, params)
         const ctx = { ...context, params, id, method: 'remove' }
+        const method = async () => await _remove(ctx.id, ctx.params)
         return await runWithHooks('remove', method, ctx)
       }
     }
@@ -102,8 +102,8 @@ export default (): Plugin => {
           const _methodCustom = service[methodName].bind(service)
 
           service[methodName] = async (data: any, params?: Params) => {
-            const method = async () => await _methodCustom(data, params)
             const ctx = { ...context, params, data, method: methodName }
+            const method = async () => await _methodCustom(ctx.data, ctx.params)
             return await runWithHooks(methodName, method, ctx)
           }
         }
@@ -121,7 +121,7 @@ export default (): Plugin => {
         defaultHooks.after[method] = []
       }
 
-      const hooks = mergeDeepRight(defaultHooks, options.hooks)
+      const hooks = mergeDeepRight(defaultHooks, options.hooks || {})
 
       addHooks(app, service, hooks, options.customMethods)
     })

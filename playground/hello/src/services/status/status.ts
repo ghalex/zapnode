@@ -12,10 +12,7 @@ export const registerStatus = async (app: App) => {
         all: []
       }
     },
-    customMethods: {
-      say: { path: 'say' }
-    },
-    customPath: '/'
+    customPath: ''
   })
 }
 
