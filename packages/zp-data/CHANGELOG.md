@@ -1,5 +1,13 @@
 # zapnode-data
 
+## 0.0.13
+
+### Patch Changes
+
+- create zapnode-auth and LocalStrategy
+- Updated dependencies
+  - zapnode@0.0.13
+
 ## 0.0.12
 
 ### Patch Changes
