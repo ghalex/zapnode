@@ -1,5 +1,18 @@
 # zapnode-plugins
 
+## 0.0.17
+
+### Patch Changes
+
+- add queryHook to plugins
+
+## 0.0.16
+
+### Patch Changes
+
+- Updated dependencies
+  - zapnode@0.0.14
+
 ## 0.0.15
 
 ### Patch Changes

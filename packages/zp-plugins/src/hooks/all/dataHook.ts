@@ -8,7 +8,6 @@ const dataHook = <T, C extends HookContext>(resolver: Resolver<T, C>) => {
     if (Array.isArray(data)) {
       ctx.data = await Promise.all(ctx.result.map(async (item) => await resolver.resolve(item, ctx)))
     } else {
-      console.log('heere')
       ctx.data = await resolver.resolve(data, ctx)
     }
   }

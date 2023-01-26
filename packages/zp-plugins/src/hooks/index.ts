@@ -134,4 +134,5 @@ export default (): Plugin => {
 }
 
 export { default as resultHook } from './all/resultHook'
+export { default as queryHook } from './all/queryHook'
 export { default as dataHook } from './all/dataHook'

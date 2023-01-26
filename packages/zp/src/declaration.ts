@@ -21,7 +21,7 @@ export interface Params<Q = Query> {
     [key: string]: any
   }
   user?: any
-  authenticated: boolean
+  authenticated?: boolean
 }
 
 export interface ServiceMethods<T = any, D = Partial<T>, P = Params> {

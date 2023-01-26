@@ -1,5 +1,11 @@
 # zapnode
 
+## 0.0.14
+
+### Patch Changes
+
+- update Params interface
+
 ## 0.0.13
 
 ### Patch Changes
