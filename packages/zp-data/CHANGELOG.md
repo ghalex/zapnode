@@ -1,5 +1,13 @@
 # zapnode-data
 
+## 0.0.15
+
+### Patch Changes
+
+- update queryHook and change hooks to execute in sequence
+- Updated dependencies
+  - zapnode@0.0.15
+
 ## 0.0.14
 
 ### Patch Changes

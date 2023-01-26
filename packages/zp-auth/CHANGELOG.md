@@ -1,5 +1,14 @@
 # zapnode-auth
 
+## 0.0.16
+
+### Patch Changes
+
+- update queryHook and change hooks to execute in sequence
+- Updated dependencies
+  - zapnode-plugins@0.0.18
+  - zapnode@0.0.15
+
 ## 0.0.15
 
 ### Patch Changes

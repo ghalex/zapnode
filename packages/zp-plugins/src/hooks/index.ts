@@ -22,14 +22,14 @@ export default (): Plugin => {
 
       // before hook
       ctx.type = 'before'
-      await Promise.all(hooksBefore.map(fn => fn(ctx)))
+      await hooksBefore.reduce((p, fn) => p.then(() => fn(ctx)), Promise.resolve())
 
       // execute
       ctx.result = await method.call()
 
       // after hook
       ctx.type = 'after'
-      await Promise.all(hooksAfter.map(fn => fn(ctx)))
+      await hooksAfter.reduce((p, fn) => p.then(() => fn(ctx)), Promise.resolve())
 
       return ctx.result
     }

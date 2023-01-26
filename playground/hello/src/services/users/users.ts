@@ -1,7 +1,7 @@
 import { App } from '@/declarations'
 import UsersClass from './users.class'
-import { userDataResolver, userResultResolver } from './users.schema'
-import { dataHook, resultHook } from 'zapnode-plugins'
+import { userDataResolver, userQueryResolver, userResultResolver } from './users.schema'
+import { dataHook, queryHook, resultHook } from 'zapnode-plugins'
 import { authenticate } from 'zapnode-auth'
 
 export const registerUsers = async (app: App) => {
@@ -13,7 +13,10 @@ export const registerUsers = async (app: App) => {
   app.addService('users', new UsersClass(collection), {
     hooks: {
       before: {
-        find: [authenticate()],
+        find: [
+          authenticate(),
+          queryHook(userQueryResolver)
+        ],
         get: [authenticate()],
         update: [authenticate()],
         patch: [authenticate()],

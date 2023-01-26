@@ -16,7 +16,6 @@ const getToken = (headers: any) => {
 const authenticate = (serviceName: string = 'auth') => {
   return async (ctx: HookContext) => {
     const { app, type } = ctx
-    const params = ctx.params as any
 
     if (type && type !== 'before') {
       throw new NotAuthenticated('The authenticate hook must be used as a before hook')
@@ -28,17 +27,17 @@ const authenticate = (serviceName: string = 'auth') => {
       throw new NotAuthenticated('Could not find a valid authentication service')
     }
 
-    if (params.authenticated === true) {
+    if (ctx.params.authenticated === true) {
       return Promise.resolve()
     }
 
-    const token = getToken(params.headers)
+    const token = getToken(ctx.params.headers)
 
     try {
       const res = await authService.verifyAccessToken(token)
 
-      params.authenticated = true
-      params.user = res
+      ctx.params.authenticated = true
+      ctx.params.user = res
     } catch (err: any) {
       throw new NotAuthenticated('Invalid token')
     }

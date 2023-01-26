@@ -11,6 +11,7 @@ interface UsersParams extends Params<Query> {}
 
 class UsersClass extends MongoDBService<User> {
   async find (params?: UsersParams) {
+    console.log('q=', params?.query)
     return this.$find(params)
   }
 

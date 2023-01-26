@@ -16,6 +16,11 @@ export interface UserData {
   password: string
 }
 
+export interface UserQuery {
+  _id: string
+  email: string
+}
+
 export const userDataResolver = resolve<User, HookContext<App>>({
   // The password should never be visible externally
   password: async (val, data, { app }) => {
@@ -37,5 +42,14 @@ export const userDataResolver = resolve<User, HookContext<App>>({
 export const userResultResolver = resolve<User, HookContext>({
   // The password should never be visible externally
   password: async () => undefined
+})
 
+export const userQueryResolver = resolve<UserQuery, HookContext>({
+  _id: async (val, user, ctx) => {
+    if (ctx.params.user) {
+      return ctx.params.user._id
+    }
+
+    return val
+  }
 })
