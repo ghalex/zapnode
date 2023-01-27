@@ -1,5 +1,11 @@
 # zapnode-data
 
+## 0.0.17
+
+### Patch Changes
+
+- fix patch hook
+
 ## 0.0.16
 
 ### Patch Changes

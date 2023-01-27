@@ -1,5 +1,12 @@
 # zapnode-auth
 
+## 0.0.18
+
+### Patch Changes
+
+- Updated dependencies
+  - zapnode-plugins@0.0.19
+
 ## 0.0.17
 
 ### Patch Changes

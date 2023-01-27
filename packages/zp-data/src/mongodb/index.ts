@@ -177,6 +177,7 @@ class MongoDBService<M = any, D = Partial<M>> implements Service<M, D> {
 
     const remapModifier = this.$remapModifiers(omit(['_id'], data))
 
+    console.log('id is', id)
     await this.collection.updateOne({ ...query, _id: this.$objectifyId(id) }, remapModifier, options)
     return this.$get(id, params)
   }

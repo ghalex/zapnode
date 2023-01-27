@@ -78,7 +78,7 @@ export default (): Plugin => {
       const _patch = service.patch.bind(service)
 
       service.patch = async (id: NullableId, data: any, params?: Params) => {
-        const ctx = { ...context, params, data, method: 'patch' }
+        const ctx = { ...context, id, params, data, method: 'patch' }
         const method = async () => await _patch(ctx.id, ctx.data, ctx.params)
         return await runWithHooks('patch', method, ctx)
       }
