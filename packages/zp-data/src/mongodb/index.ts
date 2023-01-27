@@ -46,7 +46,13 @@ class MongoDBService<M = any, D = Partial<M>> implements Service<M, D> {
     const { query, options } = this.$options(params)
     const fields = params?.query?.$select
 
-    const data = await this.collection.findOne({ ...query, _id: this.$objectifyId(id) }, options)
+    if (query._id) {
+      query._id = this.$objectifyId(query._id)
+    } else {
+      query._id = this.$objectifyId(id)
+    }
+
+    const data = await this.collection.findOne(query, options)
 
     if (!data) {
       throw new Error(`No record found for id '${id}'`)

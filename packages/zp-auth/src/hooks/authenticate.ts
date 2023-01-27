@@ -1,6 +1,6 @@
 import { NotAuthenticated } from 'zapnode'
-import { HookContext } from 'zapnode-plugins'
-import { AuthService } from '..'
+import { AppConfig, HookContext } from 'zapnode-plugins'
+import jwt from 'jsonwebtoken'
 
 const getToken = (headers: any) => {
   const authorization = headers?.authorization
@@ -13,18 +13,31 @@ const getToken = (headers: any) => {
   return values[1]
 }
 
+const verifyAccessToken = async (accessToken: string, secret: string, options: any) => {
+  const { algorithm } = options
+
+  // Normalize the `algorithm` setting into the algorithms array
+  if (algorithm) {
+    options.algorithms = (Array.isArray(algorithm) ? algorithm : [algorithm]) as Algorithm[]
+    delete options.algorithm
+  }
+
+  try {
+    const verified = jwt.verify(accessToken, secret, options)
+
+    return verified as any
+  } catch (error: any) {
+    throw new NotAuthenticated(error.message, error)
+  }
+}
+
 const authenticate = (serviceName: string = 'auth') => {
-  return async (ctx: HookContext) => {
+  return async (ctx: HookContext<AppConfig>) => {
     const { app, type } = ctx
+    const { jwt: { secret, options } } = app.config.get('auth')
 
     if (type && type !== 'before') {
       throw new NotAuthenticated('The authenticate hook must be used as a before hook')
-    }
-
-    const authService: AuthService = app.services[serviceName]
-
-    if (!authService) {
-      throw new NotAuthenticated('Could not find a valid authentication service')
     }
 
     if (ctx.params.authenticated === true) {
@@ -34,7 +47,7 @@ const authenticate = (serviceName: string = 'auth') => {
     const token = getToken(ctx.params.headers)
 
     try {
-      const res = await authService.verifyAccessToken(token)
+      const res = await verifyAccessToken(token, secret, options)
 
       ctx.params.authenticated = true
       ctx.params.user = res

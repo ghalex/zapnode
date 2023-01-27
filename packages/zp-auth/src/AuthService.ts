@@ -80,7 +80,7 @@ class AuthService {
       const accessToken = await this.createAccessToken(authentication[entity])
       const payload = jwt.decode(accessToken)
 
-      return { accessToken, authentication: { strategy: data.strategy, payload } }
+      return { accessToken, authentication: { strategy: data.strategy, payload }, [entity]: authentication[entity] }
     }
 
     throw new NotAuthenticated('Invalid authentication information (strategy not found)')

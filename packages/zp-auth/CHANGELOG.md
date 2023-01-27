@@ -1,5 +1,11 @@
 # zapnode-auth
 
+## 0.0.17
+
+### Patch Changes
+
+- change authenticate hook to work without a service
+
 ## 0.0.16
 
 ### Patch Changes
