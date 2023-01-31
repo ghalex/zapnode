@@ -10,7 +10,7 @@ const name = pkg.name
 module.exports = [
   {
     input: 'src/index.ts',
-    external: ['zapnode', 'config'],
+    external: ['zapnode', 'config', 'ramda', 'jsonwebtoken'],
     plugins: [
       esbuild()
     ],
@@ -21,7 +21,8 @@ module.exports = [
         format: 'umd',
         globals: {
           config: 'config',
-          zapnode: 'zapnode'
+          zapnode: 'zapnode',
+          ramda: 'R'
         }
       },
       {

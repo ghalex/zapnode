@@ -1,1 +1,1 @@
-export { default as MongoDBService } from './mongodb'
+export * from './mongodb'

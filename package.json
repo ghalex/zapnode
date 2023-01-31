@@ -5,7 +5,7 @@
   "scripts": {
     "build": "pnpm -r --filter='./packages/*' run build",
     "publish": "pnpm -r --filter='./packages/*' publish --no-git-checks",
-    "dev": "pnpm -r --parallel run dev"
+    "dev": "pnpm -r --filter='./packages/*' --parallel run dev"
   },
   "keywords": [],
   "author": "",

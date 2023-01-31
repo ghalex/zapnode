@@ -5,11 +5,7 @@ export const registerAuth = async (app: App) => {
   const service = new AuthService(app)
   service.addStrategy('local', new LocalStrategy())
 
-  app.addService('auth', service, {
-    customMethods: {
-      login: { path: 'login' }
-    }
-  })
+  app.addService('auth', service, {})
 }
 
 declare module '../../declarations' {

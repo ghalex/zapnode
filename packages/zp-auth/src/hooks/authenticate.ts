@@ -31,7 +31,7 @@ const verifyAccessToken = async (accessToken: string, secret: string, options: a
   }
 }
 
-const authenticate = (serviceName: string = 'auth') => {
+const authenticate = () => {
   return async (ctx: HookContext<AppConfig>) => {
     const { app, type } = ctx
     const { jwt: { secret, options } } = app.config.get('auth')

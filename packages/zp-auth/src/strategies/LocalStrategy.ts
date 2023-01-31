@@ -4,7 +4,7 @@ import passwordHash from 'password-hash'
 
 import BaseStrategy from './BaseStrategy'
 import { NotAuthenticated } from 'zapnode'
-import { AuthenticationRequest } from '@/declarations'
+import { AuthenticationRequest } from '../declarations'
 
 export class LocalStrategy extends BaseStrategy {
   get configuration () {
@@ -54,7 +54,7 @@ export class LocalStrategy extends BaseStrategy {
       throw new NotAuthenticated('Could not get service')
     }
 
-    const result = await service.$find({ query })
+    const result = await service.repository.find({ query })
     const list = Array.isArray(result) ? result : result.data
 
     if (!Array.isArray(list) || list.length === 0) {

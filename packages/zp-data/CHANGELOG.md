@@ -1,5 +1,16 @@
 # zapnode-data
 
+## 1.0.0
+
+### Major Changes
+
+- change Service interface and MongoDBService
+
+### Patch Changes
+
+- Updated dependencies
+  - zapnode@1.0.0
+
 ## 0.0.17
 
 ### Patch Changes

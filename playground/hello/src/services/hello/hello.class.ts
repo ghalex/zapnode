@@ -1,8 +1,8 @@
-import { Id } from 'zapnode'
+import { Id, Service } from 'zapnode'
 import { people } from '@/mock'
 import { HelloParams } from './hello.schema'
 
-class HelloClass {
+class HelloClass implements Service {
   private readonly data = people
 
   async find (params?: HelloParams): Promise<any> {

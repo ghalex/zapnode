@@ -1,4 +1,4 @@
-import { AuthenticationRequest, AuthenticationResult } from '@/declarations'
+import { StrategyResult, AuthenticationRequest } from '../declarations'
 import { Application } from 'zapnode'
 import { AppConfig } from 'zapnode-plugins'
 
@@ -28,7 +28,7 @@ abstract class BaseStrategy {
     return config
   }
 
-  abstract authenticate (data: AuthenticationRequest): Promise<AuthenticationResult>
+  abstract authenticate (data: AuthenticationRequest): Promise<StrategyResult>
 }
 
 export default BaseStrategy

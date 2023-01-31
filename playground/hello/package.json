@@ -1,10 +1,11 @@
 {
   "name": "hello",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "build": "rm -rf ./dist/ && tsc"
   },
   "keywords": [],
   "author": "",

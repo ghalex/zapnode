@@ -1,6 +1,6 @@
 {
   "host": "localhost",
-  "port": 5600,
+  "port": 5601,
   "public": "./public/",
   "version": "1.0.0",
   "origins": [

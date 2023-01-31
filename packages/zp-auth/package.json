@@ -1,6 +1,6 @@
 {
   "name": "zapnode-auth",
-  "version": "0.0.18",
+  "version": "1.0.0",
   "description": "zapnode auth",
   "main": "dist/zapnode-auth.umd.js",
   "module": "dist/zapnode-auth.es.js",
@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/mongodb": "^4.0.7",
     "@types/node": "^18.11.3",
-    "@types/ramda": "^0.28.20",
+    "@types/ramda": "^0.28.22",
     "esbuild": "^0.16.4",
     "rollup": "^3.7.2",
     "rollup-plugin-dts": "^5.0.0",

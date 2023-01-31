@@ -1,19 +1,28 @@
 import jwt from 'jsonwebtoken'
-import { Application, NotAuthenticated } from 'zapnode'
+import { Application, NotAuthenticated, Params, Query, Service } from 'zapnode'
 import { AppConfig } from 'zapnode-plugins'
 import BaseStrategy from './strategies/BaseStrategy'
 import LocalStrategy from './strategies/LocalStrategy'
-import { AuthenticationRequest } from './declarations'
+import { AuthenticationRequest, AuthenticationResult } from './declarations'
 import { mergeDeepRight } from 'ramda'
 
-class AuthService {
+type AuthServiceParams = Params<Query>
+interface AuthConfiguration {
+  entity: string
+  jwt: {
+    secret: string
+    options: any
+  }
+}
+
+class AuthService implements Service<AuthenticationResult, AuthenticationRequest, AuthServiceParams> {
   protected strategies: BaseStrategy[] = []
 
   constructor (private readonly app: Application & AppConfig) {}
 
-  get configuration () {
-    const config: any = this.app.config.auth || {}
-    const configJWT = {
+  get configuration (): AuthConfiguration {
+    const config = this.app.config.get('auth')
+    const configJwtDefault = {
       secret: '1234secret',
       options: {
         header: { typ: 'access' },
@@ -23,7 +32,12 @@ class AuthService {
       }
     }
 
-    return mergeDeepRight({ entity: 'user', jwt: configJWT }, config)
+    const configJwt = mergeDeepRight(configJwtDefault, config?.jwt ?? {})
+
+    return {
+      entity: config?.entity ?? 'user',
+      jwt: configJwt
+    }
   }
 
   addStrategy (name: string, strategy: BaseStrategy) {
@@ -63,15 +77,23 @@ class AuthService {
   }
 
   async hashPassword (value: string, strategyName: string) {
-    const strategy = this.strategies.find(s => s.getName() === strategyName) as LocalStrategy
+    const strategy = this.strategies.find(s => s.getName() === strategyName)
     if (strategy) {
-      return await strategy.hashPassword(value)
+      return await (strategy as LocalStrategy).hashPassword(value)
     }
 
     return value
   }
 
-  async login (data: AuthenticationRequest) {
+  async create (data: AuthenticationRequest, params?: AuthServiceParams): Promise<AuthenticationResult>
+  async create (data: AuthenticationRequest[], params?: AuthServiceParams): Promise<AuthenticationResult[]>
+  async create (data: AuthenticationRequest | AuthenticationRequest[], params?: AuthServiceParams): Promise<AuthenticationResult | AuthenticationResult[]> {
+    if (Array.isArray(data)) {
+      throw new NotAuthenticated('Invalid data information')
+    }
+
+    console.log(this.configuration)
+
     const { entity } = this.configuration
     const strategy = this.strategies.find(s => s.getName() === data.strategy)
 

@@ -1,5 +1,17 @@
 # zapnode-auth
 
+## 1.0.0
+
+### Major Changes
+
+- change Service interface and MongoDBService
+
+### Patch Changes
+
+- Updated dependencies
+  - zapnode@1.0.0
+  - zapnode-plugins@1.0.0
+
 ## 0.0.18
 
 ### Patch Changes

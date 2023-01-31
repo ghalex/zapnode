@@ -45,10 +45,10 @@ export const userResultResolver = resolve<User, HookContext>({
 })
 
 export const userQueryResolver = resolve<UserQuery, HookContext>({
-  _id: async (val, user, ctx) => {
-    if (ctx.params.user) {
-      return ctx.params.user._id
-    }
+  _id: async (val, user, { params }) => {
+    // if (params.user) {
+    //   return params.user._id
+    // }
 
     return val
   }

@@ -1,10 +1,16 @@
 
+export interface StrategyResult {
+  strategy: string
+  [key: string]: any
+}
+
 export interface AuthenticationRequest {
-  strategy?: string
+  strategy: string
   [key: string]: any
 }
 
 export interface AuthenticationResult {
-  strategy: string
+  accessToken: string
+  authentication: StrategyResult
   [key: string]: any
 }
