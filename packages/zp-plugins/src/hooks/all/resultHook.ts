@@ -2,9 +2,10 @@ import { Resolver } from 'zapnode'
 import { HookContext } from '..'
 
 const getData = <H extends HookContext>(context: H) => {
-  const isPaginated = context.method === 'find' && context.result.data
+  const isPaginated = context.method === 'find' && context.params.query?.$paginate !== undefined
   const data = isPaginated ? context.result.data : context.result
 
+  console.log('getdata', { isPaginated, data })
   return { isPaginated, data }
 }
 
