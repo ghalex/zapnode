@@ -1,5 +1,14 @@
 # zapnode-auth
 
+## 1.0.1
+
+### Patch Changes
+
+- fix resultHook
+- Updated dependencies
+  - zapnode@1.0.1
+  - zapnode-plugins@1.0.1
+
 ## 1.0.0
 
 ### Major Changes

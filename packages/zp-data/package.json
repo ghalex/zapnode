@@ -1,6 +1,6 @@
 {
   "name": "zapnode-data",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "zapnode data adapters",
   "main": "dist/zapnode-data.umd.js",
   "module": "dist/zapnode-data.es.js",
