@@ -1,5 +1,13 @@
 # zapnode-data
 
+## 1.0.2
+
+### Patch Changes
+
+- remove console.log
+- Updated dependencies
+  - zapnode@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes

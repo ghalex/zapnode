@@ -1,5 +1,14 @@
 # zapnode-auth
 
+## 1.0.2
+
+### Patch Changes
+
+- remove console.log
+- Updated dependencies
+  - zapnode-plugins@1.0.2
+  - zapnode@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
