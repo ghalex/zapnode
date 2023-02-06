@@ -1,6 +1,6 @@
 {
   "name": "zapnode-auth",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "zapnode auth",
   "main": "dist/zapnode-auth.umd.js",
   "module": "dist/zapnode-auth.es.js",

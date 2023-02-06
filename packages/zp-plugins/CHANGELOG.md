@@ -1,5 +1,13 @@
 # zapnode-plugins
 
+## 1.0.3
+
+### Patch Changes
+
+- fix dataHook bug
+- Updated dependencies
+  - zapnode@1.0.3
+
 ## 1.0.2
 
 ### Patch Changes

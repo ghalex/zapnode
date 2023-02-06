@@ -1,5 +1,11 @@
 # zapnode
 
+## 1.0.3
+
+### Patch Changes
+
+- fix dataHook bug
+
 ## 1.0.2
 
 ### Patch Changes
