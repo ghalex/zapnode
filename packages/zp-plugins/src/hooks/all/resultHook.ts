@@ -10,15 +10,17 @@ const getData = <H extends HookContext>(context: H) => {
 
 const resultHook = <T, C extends HookContext>(resolver: Resolver<T, C>) => {
   return async (ctx: C) => {
-    const { data, isPaginated } = getData(ctx)
+    if (ctx.result) {
+      const { data, isPaginated } = getData(ctx)
 
-    const result = Array.isArray(data)
-      ? await Promise.all(data.map(async (item) => await resolver.resolve(item, ctx)))
-      : await resolver.resolve(data, ctx)
+      const result = Array.isArray(data)
+        ? await Promise.all(data.map(async (item) => await resolver.resolve(item, ctx)))
+        : await resolver.resolve(data, ctx)
 
-    ctx.result = isPaginated
-      ? { ...ctx.result, data: result }
-      : result
+      ctx.result = isPaginated
+        ? { ...ctx.result, data: result }
+        : result
+    }
   }
 }
 

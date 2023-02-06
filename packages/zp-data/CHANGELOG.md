@@ -1,5 +1,13 @@
 # zapnode-data
 
+## 1.0.4
+
+### Patch Changes
+
+- update queryHook & resultHook
+- Updated dependencies
+  - zapnode@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes

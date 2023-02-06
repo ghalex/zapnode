@@ -1,5 +1,14 @@
 # zapnode-auth
 
+## 1.0.4
+
+### Patch Changes
+
+- update queryHook & resultHook
+- Updated dependencies
+  - zapnode-plugins@1.0.4
+  - zapnode@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes
