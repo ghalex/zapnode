@@ -1,5 +1,11 @@
 # zapnode
 
+## 1.0.5
+
+### Patch Changes
+
+- a0bcf37: add $before prop to resolver
+
 ## 1.0.4
 
 ### Patch Changes

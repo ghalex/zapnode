@@ -1,5 +1,15 @@
 # hello
 
+## 1.0.18
+
+### Patch Changes
+
+- Updated dependencies [a0bcf37]
+  - zapnode@1.0.5
+  - zapnode-auth@1.0.5
+  - zapnode-data@1.0.5
+  - zapnode-plugins@1.0.5
+
 ## 1.0.17
 
 ### Patch Changes
