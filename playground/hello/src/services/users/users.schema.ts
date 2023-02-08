@@ -1,6 +1,7 @@
 import { App } from '@/declarations'
 import { resolve } from 'zapnode'
 import { HookContext } from 'zapnode-plugins'
+import axios from '@/axios'
 
 export interface User {
   _id: string
@@ -8,6 +9,7 @@ export interface User {
   name: string
   password: string
   createdAt: Date
+  product: any
 }
 
 export interface UserData {
@@ -41,7 +43,18 @@ export const userDataResolver = resolve<User, HookContext<App>>({
 
 export const userResultResolver = resolve<User, HookContext>({
   // The password should never be visible externally
-  password: async () => undefined
+  $before: async (_, ctx) => {
+    const { data } = await axios.get('/products')
+    return { products: data.products }
+  },
+  password: async () => undefined,
+  product: async (value, data, ctx, { products }) => {
+    if (products) {
+      return products[0]
+    }
+
+    return value
+  }
 })
 
 export const userQueryResolver = resolve<UserQuery, HookContext>({
@@ -49,7 +62,6 @@ export const userQueryResolver = resolve<UserQuery, HookContext>({
     // if (params.user) {
     //   return params.user._id
     // }
-
     return val
   }
 })
