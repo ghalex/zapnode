@@ -1,5 +1,11 @@
 # zapnode
 
+## 1.0.8
+
+### Patch Changes
+
+- Update MongoDB service and Repository
+
 ## 1.0.7
 
 ### Patch Changes

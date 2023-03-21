@@ -14,7 +14,7 @@ interface Options {
   }
 }
 
-class MongoDBRepository<Result = any, Data = Partial<Result>, RepositoryParams extends Params<any> = any> {
+class MongoDBRepository<Result = any, Data = any, RepositoryParams extends Params = any> {
   protected collection: Collection
   protected keys = ['$sort', '$limit', '$skip', '$select']
 
@@ -87,9 +87,7 @@ class MongoDBRepository<Result = any, Data = Partial<Result>, RepositoryParams e
     return data as Result
   }
 
-  async find (params?: RepositoryParams): Promise<Result[]>
-  async find (params?: RepositoryParams & { query: { $paginate: true } }): Promise<Paginated<Result>>
-  async find (params: RepositoryParams = {} as RepositoryParams): Promise<Paginated<Result> | Result[]> {
+  async find (params?: RepositoryParams): Promise<Paginated<Result> | Result[]> {
     const { filters, query, options } = this.$options(params)
 
     if (query._id) {
@@ -143,8 +141,6 @@ class MongoDBRepository<Result = any, Data = Partial<Result>, RepositoryParams e
     return Promise.all(Object.values(insertResult.insertedIds).map(async _id => this.collection.findOne({ _id }, options))) as Promise<Result[]>
   }
 
-  // async create (data: Data, params?: RepositoryParams): Promise<Result>
-  // async create (data: Data[], params?: RepositoryParams): Promise<Result[]>
   async create (data: Data | Data[], params: RepositoryParams = {} as RepositoryParams): Promise<Result | Result[]> {
     const { options } = this.$options(params)
 
@@ -175,16 +171,16 @@ class MongoDBRepository<Result = any, Data = Partial<Result>, RepositoryParams e
     const remapModifier = this.$remapModifiers(omit(['_id'], data))
 
     await this.collection.updateMany(query, remapModifier, { ...options, multi: true })
-    return this.find({ ...params, paginate: false })
+    return this.find({ ...params, query: { ...params.query, $paginate: undefined } })
   }
 
-  public async patch (id: NullableId, data: Data, params?: RepositoryParams) {
+  public async patch (id: NullableId, data: Data, params?: RepositoryParams): Promise<Result | Result[]> {
     if (id === null) {
       if (params === undefined) {
         throw new Error('Cannot patch multiple objects without params')
       }
 
-      return this.$patchMany(data, params)
+      return this.$patchMany(data, params) as Promise<Result[]>
     }
 
     const { query, options } = this.$options(params)
@@ -198,7 +194,7 @@ class MongoDBRepository<Result = any, Data = Partial<Result>, RepositoryParams e
   protected async $removeMany (params: RepositoryParams) {
     const { query, options } = this.$options(params)
 
-    const items = (await this.find({ ...params, paginate: false }))
+    const items = (await this.find({ ...params, query: { ...params.query, $paginate: undefined } }))
     await this.collection.deleteMany(query, { ...options, multi: true })
 
     return items
@@ -210,7 +206,7 @@ class MongoDBRepository<Result = any, Data = Partial<Result>, RepositoryParams e
         throw new Error('Cannot remove multiple objects without params')
       }
 
-      return this.$removeMany(params)
+      return this.$removeMany(params) as Promise<Result[]>
     }
 
     const { query, options } = this.$options(params)
