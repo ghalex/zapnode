@@ -31,20 +31,11 @@ export interface Paginated<R> {
   data: R[]
 }
 
-export interface Service<Result = any, Data = Partial<Result>, ServiceParams extends Params = any> {
-  find? (params?: ServiceParams): Promise<Result[]>
-  find? (params?: ServiceParams & { query: { $paginate: true } }): Promise<Paginated<Result>>
+export interface Service<Result = any, Data = any, ServiceParams extends Params = any> {
   find? (params?: ServiceParams): Promise<Paginated<Result> | Result[]>
-
-  create? (data: Data, params?: ServiceParams): Promise<Result>
-  create? (data: Data[], params?: ServiceParams): Promise<Result[]>
-
-  patch? (id: null, data: Data, params?: ServiceParams): Promise<Result[]>
-  patch? (id: Id, data: Data, params?: ServiceParams): Promise<Result>
-
-  remove? (id: null, params?: ServiceParams): Promise<Result[]>
-  remove? (id: Id, params?: ServiceParams): Promise<Result>
-
+  create? (data: Data | Data[], params?: ServiceParams): Promise<Result | Result[]>
+  patch? (id: Id | null, data: Data, params?: ServiceParams): Promise<Result | Result[]>
+  remove? (id: Id | null, params?: ServiceParams): Promise<Result | Result[]>
   get? (id: Id, params?: ServiceParams): Promise<Result>
   update? (id: Id, data: Data, params?: ServiceParams): Promise<Result>
 }

@@ -1,5 +1,14 @@
 # zapnode-auth
 
+## 1.0.6
+
+### Patch Changes
+
+- Update type definition for Service
+- Updated dependencies
+  - zapnode@1.0.6
+  - zapnode-plugins@1.0.6
+
 ## 1.0.5
 
 ### Patch Changes
