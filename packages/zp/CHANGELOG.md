@@ -1,5 +1,11 @@
 # zapnode
 
+## 1.0.7
+
+### Patch Changes
+
+- Rebuild project
+
 ## 1.0.6
 
 ### Patch Changes
