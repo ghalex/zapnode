@@ -1,5 +1,11 @@
 # zapnode
 
+## 1.0.9
+
+### Patch Changes
+
+- Update dependencies
+
 ## 1.0.8
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # zapnode-data
 
+## 1.0.9
+
+### Patch Changes
+
+- Update dependencies
+- Updated dependencies
+  - zapnode@1.0.9
+
 ## 1.0.8
 
 ### Patch Changes

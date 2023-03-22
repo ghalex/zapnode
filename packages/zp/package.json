@@ -1,6 +1,6 @@
 {
   "name": "zapnode",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "zapnode core library",
   "main": "dist/zapnode.umd.js",
   "module": "dist/zapnode.es.js",
@@ -17,13 +17,13 @@
   "keywords": [],
   "author": "Ghiura Alexandru",
   "dependencies": {
-    "rxjs": "^7.6.0"
+    "rxjs": "^7.8.0"
   },
   "devDependencies": {
-    "esbuild": "^0.16.4",
-    "rollup": "^3.7.2",
-    "rollup-plugin-dts": "^5.0.0",
+    "esbuild": "^0.17.12",
+    "rollup": "^3.20.0",
+    "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-esbuild": "^5.0.0",
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.2"
   }
 }

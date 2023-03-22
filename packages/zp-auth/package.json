@@ -1,6 +1,6 @@
 {
   "name": "zapnode-auth",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "zapnode auth",
   "main": "dist/zapnode-auth.umd.js",
   "module": "dist/zapnode-auth.es.js",
@@ -33,6 +33,6 @@
     "rollup": "^3.7.2",
     "rollup-plugin-dts": "^5.0.0",
     "rollup-plugin-esbuild": "^5.0.0",
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.2"
   }
 }
