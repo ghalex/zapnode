@@ -17,6 +17,7 @@ const app: App = zapnode({
 })
 
 const start = async () => {
+  console.log(app.config)
   await registerServices(app)
   await app.listen(app.config.port)
 }
