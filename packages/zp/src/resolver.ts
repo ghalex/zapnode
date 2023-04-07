@@ -74,7 +74,7 @@ export class Resolver<T, C> {
     )
 
     if (hasErrors) {
-      throw new Error('Error resolving data', errors)
+      throw new Error(JSON.stringify(errors))
     }
 
     return result

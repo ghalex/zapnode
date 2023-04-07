@@ -1,5 +1,17 @@
 # zapnode
 
+## 1.0.11
+
+### Patch Changes
+
+- Update express json limit
+
+## 1.0.10
+
+### Patch Changes
+
+- Handle resolver errors
+
 ## 1.0.9
 
 ### Patch Changes

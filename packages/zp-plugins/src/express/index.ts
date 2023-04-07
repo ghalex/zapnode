@@ -12,16 +12,19 @@ export interface AppExpress {
 
 export default (app?: Express): Plugin => {
   const name = 'express'
-  const expressApp = app ?? express()
+  const expressApp = app ?? (() => {
+    const newApp = express()
+    newApp.use(express.urlencoded({ extended: true }))
+    newApp.use(express.json({ limit: '1000kb' }))
+    newApp.use(queryParser({
+      parseNull: true,
+      parseUndefined: true,
+      parseBoolean: true,
+      parseNumber: true
+    }))
 
-  expressApp.use(express.urlencoded({ extended: true }))
-  expressApp.use(express.json())
-  expressApp.use(queryParser({
-    parseNull: true,
-    parseUndefined: true,
-    parseBoolean: true,
-    parseNumber: true
-  }))
+    return newApp
+  })()
 
   expressApp.use('/', cors('*'))
 

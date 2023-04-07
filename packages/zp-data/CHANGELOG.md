@@ -1,5 +1,20 @@
 # zapnode-data
 
+## 1.0.11
+
+### Patch Changes
+
+- Update express json limit
+- Updated dependencies
+  - zapnode@1.0.11
+
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies
+  - zapnode@1.0.10
+
 ## 1.0.9
 
 ### Patch Changes
