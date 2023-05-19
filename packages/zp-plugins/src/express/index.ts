@@ -16,15 +16,16 @@ export default (app?: Express): Plugin => {
     const newApp = express()
     newApp.use(express.urlencoded({ extended: true }))
     newApp.use(express.json({ limit: '1000kb' }))
-    newApp.use(queryParser({
-      parseNull: true,
-      parseUndefined: true,
-      parseBoolean: true,
-      parseNumber: true
-    }))
 
     return newApp
   })()
+
+  expressApp.use(queryParser({
+    parseNull: true,
+    parseUndefined: true,
+    parseBoolean: true,
+    parseNumber: true
+  }))
 
   expressApp.use('/', cors('*'))
 
